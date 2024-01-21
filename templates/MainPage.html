@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Luxury Wheels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("/templates/images/logos/MainLogo.png");
+            background-repeat: repeat;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center; /* Adicionado para centralizar o texto */
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Categorias
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="/categorias/diamond">Diamond</a>
+                <a href="/categorias/gold">Gold</a>
+                <a href="/categorias/silver">Silver</a>
+            </div>
+        </div>
+        <a href="/register">Criar Conta</a>
+        <a href="/login">Login</a>
+    </div>
+    <h1>Bem-vindo ao Luxury Wheels</h1>
+    <p><strong>Luxury Wheels é um site fictício de aluguel de carros, criado como projeto final da escola Tokyo School. A intenção deste site é demonstrar que o aluno está apto a criar e modificar um site de acordo com o gosto do cliente.</strong></p>
+    <p><strong>Criado por: Flavio Lamas</strong></p>
+    <br>
+        <p><strong>Luxury Wheels is a fictional car rental website created as a Tokyo School final project. The intention of this website is to demonstrate that the student is able to create and modify a website according to the client's taste.</strong></p>
+    </br>
+    <p><strong>Created By: Flavio Lamas</strong></p>
+
+</body>
+</html>

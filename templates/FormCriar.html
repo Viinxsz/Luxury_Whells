@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário Criação de Usuários</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .button-group button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            background-color: #5cb85c;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form>
+         <div class="navbar">
+        <a href="/">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Categorias
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="/categorias/diamond">Diamond</a>
+                <a href="/categorias/gold">Gold</a>
+                <a href="/categorias/silver">Silver</a>
+            </div>
+        </div>
+        <a href="/register">Criar Conta</a>
+        <a href="/login">Login</a>
+    </div>
+        <h1>Formulário Criação de Usuários</h1>
+
+        <div class="input-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <div class="input-group">
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade" min="18" max="120" required>
+        </div>
+        <div class="input-group">
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone" pattern="\+?[0-9]{2,3}-?[0-9]{2}-?[0-9]{4,5}-?[0-9]{4}" placeholder="+55-11-99999-9999">
+        </div>
+        <div class="input-group">
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco">
+        </div>
+        <p>Tipo de cliente:</p>
+        <div>
+            <input type="radio" id="silver" name="tipo" value="silver">
+            <label for="silver">Silver</label>
+        </div>
+        <div>
+            <input type="radio" id="gold" name="tipo" value="gold">
+            <label for="gold">Gold</label>
+        </div>
+        <div>
+            <input type="radio" id="diamond" name="tipo" value="diamond">
+            <label for="diamond">Diamond</label>
+        </div>
+        <div class="button-group">
+            <button onclick="/templates/Login.html?_ijt=b1hpstll5ngeu34suhe32ld1ls&_ij_reload=RELOAD_ON_SAVE';">Go To Login</button>
+
+        </div>
+    </form>
+    <script>
+        function enviarFormulario() {
+            var nome = document.getElementById('nome').value;
+            var idade = document.getElementById('idade').value;
+            var telefone = document.getElementById('telefone').value;
+            var endereco = document.getElementById('endereco').value;
+            var tipoCliente = document.querySelector('input[name="tipo"]:checked').value;
+
+            var dadosUsuario = {
+                nome: nome,
+                idade: idade,
+                telefone: telefone,
+                endereco: endereco,
+                tipo: tipoCliente
+            };
+
+            fetch('http://localhost/criar_usuario', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosUsuario)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Resposta da API:', data);
+                // Redirecionar para a página de login após o envio bem-sucedido
+                window.location.href = '/templates/Login.html?_ijt=b1hpstll5ngeu34suhe32ld1ls&_ij_reload=RELOAD_ON_SAVE';
+            })
+            .catch(error => {
+                console.error('Erro ao enviar dados para a API:', error);
+            });
+        }
+    </script>
+</body>
+</html>

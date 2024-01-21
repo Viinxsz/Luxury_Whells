@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorias</title>
+    <style>
+        body {
+            background-image: url("/static/images/logos/UEUEUE.png.png");
+            background-repeat: repeat;
+            background-size: contain;
+            background-position: center;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        img {
+            border: 2px solid gold;
+            width: 20%;
+            margin: 60px;
+        }
+        #categorias {
+            width: 100%;
+        }
+        .celulaB {
+            display: flex;
+            text-align: Center;
+            flex-direction: column;
+            align-items: center;
+            color : white
+        }
+        .celulaB button {
+            margin-Bottom: 45px;
+            padding: 10px 40px;  /* Aumenta o tamanho do botão */
+            font-size: 1.2em;  /* Aumenta o tamanho da fonte */
+            background-color: #95A6F7;  /* Muda a cor de fundo do botão */
+            color: white;  /* Muda a cor do texto do botão */
+            border: none;
+            border-radius: 5px;  /* Arredonda os cantos do botão */
+            cursor: pointer;
+        }
+        .celulaB button:hover {
+            background-color: #45a049;  /* Muda a cor de fundo quando o mouse passa por cima */
+        }
+    </style>
+</head>
+<body>
+ <div class="navbar">
+        <a href="/">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Categorias
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="/categorias/diamond">Diamond</a>
+                <a href="/categorias/gold">Gold</a>
+                <a href="/categorias/silver">Silver</a>
+            </div>
+        </div>
+        <a href="/register">Criar Conta</a>
+        <a href="/login">Login</a>
+    </div>
+</body>
+</html>
+
+
+</head>
+<body>
+    <div id="container">
+
+        <h1>_________________________________________Gold Client________________________________________</h1>
+        <table id="categorias">
+            <tr>
+                <th>Gold</th>
+            </tr>
+            <tr>
+                <td class="celulaB">
+                    <img src="/static/images/logos/goldclient.png" />
+                    <br>BMW-5-series<img src="/static/images/Diamond-Client-Cars-Access/BMW-5-series.png" />
+                    <button onclick="location.href='/alugar/BMW-5-series';">Rent Now</button>
+                    <br>BMW-Serie1<img src="/static/images/Gold-Client-Cars-Access/BMW-SERIE1.png" />
+                    <button onclick="location.href='/alugar/BMW-SERIE1';">Rent Now</button>
+                    <br>AlfaRomeo-Giulia<img src="/static/images/Diamond-Client-Cars-Access/Alfa-Romeo-PNG-Photos.png" />
+                    <button onclick="location.href='/alugar/Alfa-Romeo';">Rent Now</button>
+                    <br>Fiat-Ducato<img src="/static/images/Diamond-Client-Cars-Access/pngtree-rv-truck-recreational-png-image_9649896.png" />
+                    <button onclick="location.href='/alugar/Fiat-Ducato';">Rent Now</button>
+                    <br>Opel-Adam<img src="/static/images/Diamond-Client-Cars-Access/corsa_e3t_GF6_02.png" />
+                    <button onclick="location.href='/alugar/Opel-Adam';">Rent Now</button>
+                    <br>Opel-Crossland<img src="/static/images/Diamond-Client-Cars-Access/crossland.png" />
+                    <button onclick="location.href='/alugar/crossland';">Rent Now</button>
+                    <br>Opel-Astra<img src="/static/images/Diamond-Client-Cars-Access/astra.png" />
+                    <button onclick="location.href='/alugar/Opel-Astra';">Rent Now</button>
+                    <br>Volkswagen-Kombi<img src="/static/images/Diamond-Client-Cars-Access/komni.png" />
+                    <button onclick="location.href='/alugar/Kombi';">Rent Now</button>
+                    <br>Volkswagen-Arteon<img src="/static/images/Diamond-Client-Cars-Access/VW-Arteon.png" />
+                    <button onclick="location.href='/alugar/VW-Arteon';">Rent Now</button>
+                    <br>Stelvio_Alpha_Romeu<img src="/static/images/Diamond-Client-Cars-Access/Stelvio_Alpha_Romeu.png" />
+                    <button onclick="location.href='/alugar/Stelvio_Alpha_Romeu';">Rent Now</button>
+                    <br>Opel-Mokka-e<img src="/static/images/Diamond-Client-Cars-Access/mokka.png" />
+                    <button onclick="location.href='/alugar/mokka';">Rent Now</button>
+                    <br>Fiat-Eletrico<img src="/static/images/Diamond-Client-Cars-Access/Fiat Eletrico.png" />
+                    <button onclick="location.href='/alugar/Fiat-Eletrico';">Rent Now</button>
+                    <br>Volto-xc90<img src="/static/images/Diamond-Client-Cars-Access/XC90.png" />
+                    <button onclick="location.href='/alugar/Volvo-XC90';">Rent Now</button>
+                    <br>Volvo-ex30<img src="/static/images/Diamond-Client-Cars-Access/EX30.png" />
+                    <button onclick="location.href='/alugar/Volvo-EX30';">Rent Now</button>
+                    <br>Volvo-s40<img src="/static/images/Diamond-Client-Cars-Access/s40.png" />
+                    <button onclick="location.href='/alugar/Volvo-s40';">Rent Now</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
