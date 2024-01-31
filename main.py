@@ -28,7 +28,7 @@ def register():
 @app.route('/criar_usuario', methods=['POST'])
 def criar_usuario_api():
     usuario = request.get_json()
-    criar_usuario(usuario['nome'], usuario['idade'], usuario['telefone'], usuario['endereco'], usuario['tipo'])
+    criar_usuario(usuario['nome'], usuario['email'],  usuario['senha'], usuario['idade'], usuario['telefone'], usuario['tipo'])
     return {'status': 'success'}, 200
 
 

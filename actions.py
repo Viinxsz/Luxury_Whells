@@ -1,29 +1,41 @@
 import sqlite3
 
+import psycopg2 as psycopg2
 
-def criar_usuario(nome, idade, telefone, endereco, forma_de_pagamento, cliente=True):
-    # Conecte-se ao seu banco de dados
-    conn = sqlite3.connect('database/database.sql')
 
-    # Crie um cursor
-    cur = conn.cursor()
-
-    # Execute a consulta SQL
-    cur.execute("""
-        INSERT INTO db_clientes (
-            nome,
-            idade,
-            telefone,
-            endereco,
-            forma_de_pagamento,
-            cliente
+def criar_usuario(nome, email, senha, idade, telefone, cliente):
+    try:
+        conn = psycopg2.connect(
+            host="localhost",
+            port="5432",
+            database="postgres",
+            user="postgres",
+            password="postgres"
         )
-        VALUES (?, ?, ?, ?, ?, ?)
-    """, (nome, idade, telefone, endereco, forma_de_pagamento, cliente))
+        # Crie um cursor
+        cur = conn.cursor()
+        idade = int(idade)
+        cur.execute(f"""
+                INSERT INTO public.db_clientes (
+                 nome,
+                 email,
+                 senha,
+                 idade,
+                 telefone,
+                 cliente
+                )
+                VALUES (
+                 '{nome}', '{email}', '{senha}', {idade}, '{telefone}', '{cliente}');
+               """)
 
-    # Confirme as alterações
-    conn.commit()
+        # Confirme as alterações
+        conn.commit()
 
-    # Feche o cursor e a conexão
-    cur.close()
-    conn.close()
+        # Feche o cursor e a conexão
+        cur.close()
+        conn.close()
+
+        return {"success": True}
+    except Exception as e:
+        print(e)
+

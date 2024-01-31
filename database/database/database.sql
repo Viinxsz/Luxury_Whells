@@ -93,12 +93,11 @@ ALTER SEQUENCE public.db_carros_id_veiculo_seq OWNED BY public.db_carros.id_veic
 CREATE TABLE public.db_clientes (
     id_cliente integer NOT NULL,
     nome character varying(100) NOT NULL,
+    email character varying(20) NOT NULL,
+    senha character varying(20) NOT NULL,
     idade integer NOT NULL,
     telefone character varying(15) NOT NULL,
-    endereco character varying(200) NOT NULL,
-    forma_de_pagamento character varying(20) NOT NULL,
-    cliente boolean DEFAULT true,
-    CONSTRAINT db_clientes_forma_de_pagamento_check CHECK (((forma_de_pagamento)::text = ANY ((ARRAY['dinheiro'::character varying, 'cartao'::character varying, 'boleto'::character varying])::text[]))),
+    cliente  character varying(15) NOT NULL,
     CONSTRAINT db_clientes_idade_check CHECK ((idade > 0))
 );
 
