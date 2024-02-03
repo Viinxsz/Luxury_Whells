@@ -100,7 +100,7 @@
 </head>
 <body>
 
-<form>
+<form id="form">
   <div class="navbar">
     </div>
   <h1>Formulário de Criação de Conta</h1>
@@ -165,18 +165,41 @@
     .then(response => response.json())
     .then(data => {
       console.log('Resposta da API:', data);
-      // If registration is successful:
-        if (data.status === 'success') {
-      window.location.href = '/login'; // Redirect to login page
-    } else {
-      // Display error message to the user
-      alert(data.error); // Or use a more appropriate error display method
-    }
-    })
-    .catch(error => {
-      console.error('Erro ao registrar usuário:', error);
-      // Handle registration errors (e.g., display an error message)
-    });
-  }
+      showConfirmation();
+
+  })
+  .catch(error => {
+    console.error('Erro ao registrar usuário:', error);
+    // Handle registration errors gracefully, informing the user about the issue
+    console.log('Ocorreu um erro ao registrar o usuário. Por favor, tente novamente mais tarde.');
+  });
+}
+function showConfirmation() {
+  // Cria a div da tela de confirmação
+  const confirmation = document.createElement('div');
+  confirmation.classList.add('confirmation');
+  confirmation.innerHTML = `
+    <h1>Cadastro realizado com sucesso!</h1>
+    <p>Parabéns! Sua conta foi criada com sucesso. Agora você pode fazer login e aproveitar todos os benefícios da nossa plataforma.</p>
+    <a href="/login" class="button">Fazer login</a>
+  `;
+
+  // Adiciona a div ao corpo da página
+  document.body.appendChild(confirmation);
+
+  // Mostra a tela de confirmação
+  confirmation.classList.add('show');
+
+  // Remove a tela de confirmação após 5 segundos
+  setTimeout(() => {
+    confirmation.classList.remove('show');
+  }, 5000);
+}
+
+// Chama a função showConfirmation após o envio do formulário
+document.getElementById('form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  showConfirmation();
+});
 </script>
 </body>
