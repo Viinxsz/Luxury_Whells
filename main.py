@@ -77,5 +77,11 @@ def rent(car_name):
 def dash():
     return render_template('Dashboard.html')
 
+
+@app.route('/dashboard/<info_alugar>')
+def dashboard(info_alugar):
+    return render_template('Dashboard.html', info_alugar=info_alugar)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

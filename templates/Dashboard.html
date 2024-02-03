@@ -94,4 +94,42 @@
         </div>
     </div>
 </body>
+<script>
+    const carros = [
+  {
+    "nome": "Fiat Mobi",
+    "diasDisponiveis": 5,
+    "valorDiaria": 100
+  },
+  {
+    "nome": "Renault Kwid",
+    "diasDisponiveis": 7,
+    "valorDiaria": 120
+  },
+  {
+    "nome": "Chevrolet Onix",
+    "diasDisponiveis": 10,
+    "valorDiaria": 150
+  }
+];
+
+const tabelaCarros = document.getElementById("tabela-carros");
+
+carros.forEach(carro => {
+  const linha = document.createElement("tr");
+  const celulaCarro = document.createElement("td");
+  const celulaDias = document.createElement("td");
+  const celulaValor = document.createElement("td");
+
+  celulaCarro.textContent = carro.nome;
+  celulaDias.textContent = carro.diasDisponiveis;
+  celulaValor.textContent = carro.valorDiaria * carro.diasDisponiveis;
+
+  linha.appendChild(celulaCarro);
+  linha.appendChild(celulaDias);
+  linha.appendChild(celulaValor);
+
+  tabelaCarros.appendChild(linha);
+});
+</script>
 </html>
