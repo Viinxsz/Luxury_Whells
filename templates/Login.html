@@ -120,7 +120,7 @@
             </div>
         </div>
         <a href="/register">Criar Conta</a>
-        <a href="/login">Login</a>
+        <a href="/login">Painel</a>
     </div>
         <div id="form">
             <h1>Login</h1>
@@ -135,7 +135,7 @@
                 </div>
                 <div class="button-group">
                     <button type="submit" id="login">Entrar</button>
-                    <button type="button" id="register"><a href="FormCriar.html">Criar conta</a></button>
+                    <button type="button" id="register"><a href="/register">Criar conta</a></button>
                 </div>
             </form>
         </div>
@@ -150,8 +150,9 @@ document.getElementById("login").addEventListener("click", function(event) {
 
   loginUsuario(email, senha)
     .then(response => {
-      // Se o login for bem-sucedido, redirecione para a página principal ou outra página desejada
       if (response.status === 'true') {
+        const idCliente = response.usuario.id_cliente;
+        localStorage.setItem('idCliente', idCliente);
          // Login bem-sucedido
          window.location.href = "/dash";
       } else {

@@ -73,6 +73,7 @@ def buscar_usuario(email):
         if usuario:
             # Retorna um dicionário com as informações do usuário
             return {
+                "id_cliente": usuario[0],
                 "nome": usuario[1],
                 "email": usuario[2],
                 "senha": usuario[3],
@@ -117,3 +118,78 @@ def login_user(email, senha):
     except Exception as e:
         print(e)
         return None
+
+
+def buscar_carros(id_cliente):
+    try:
+        conn = psycopg2.connect(
+            host="localhost",
+            port="5432",
+            database="postgres",
+            user="postgres",
+            password="postgres"
+        )
+        # Crie um cursor
+        cur = conn.cursor()
+        cur.execute(f"""
+                SELECT *
+                FROM public.db_carros
+                WHERE id_cliente = {id_cliente};
+               """)
+
+        # Retorne os dados do carro
+        carros = cur.fetchall()
+
+        # Confirme as alterações
+        conn.commit()
+
+        # Feche o cursor e a conexão
+        cur.close()
+        conn.close()
+
+        return {"success": True, "carros": carros}
+    except Exception as e:
+        print(e)
+        return {"success": False, "error": str(e)}
+
+
+def alugar_carro(id_cliente, nome_carro, data_inicio, data_devolucao):
+    try:
+        conn = psycopg2.connect(
+            host="localhost",
+            port="5432",
+            database="postgres",
+            user="postgres",
+            password="postgres"
+        )
+        # Crie um cursor
+        cur = conn.cursor()
+        cur.execute(f"""
+                UPDATE public.db_carros
+                SET alugado = True,
+                    id_cliente = {id_cliente},
+                    data_locacao = '{data_inicio}',
+                    data_devolucao = '{data_devolucao}'
+                WHERE modelo = '{nome_carro}' AND disponivel = True;
+               """)
+
+        # Verifique se o carro foi alugado
+        linhas_afetadas = cur.rowcount
+
+        # Confirme as alterações
+        conn.commit()
+
+        # Feche o cursor e a conexão
+        cur.close()
+        conn.close()
+
+        if linhas_afetadas == 1:
+            return {"success": True, "message": "Carro alugado com sucesso!"}
+        elif linhas_afetadas == 0:
+            return {"success": False, "error": "Carro não disponível ou nome incorreto."}
+        else:
+            return {"success": False, "error": "Erro inesperado ao alugar o carro."}
+
+    except Exception as e:
+        print(e)
+        return {"success": False, "error": str(e)}

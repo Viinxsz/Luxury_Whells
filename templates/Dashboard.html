@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,50 +86,60 @@
             </div>
         </div>
         <a href="/register">Criar Conta</a>
-        <a href="/login">Login</a>
+        <a href="/login">Painel</a>
     </div>
         <div id="form">
-            <h1>Dashboard</h1>
-
+            <h1>Meu Carro Alugado</h1>
+            <table id="carros-alugados">
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Fabricante</th>
+                        <th>Data Locação</th>
+                        <th>Data Devolução</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
         </div>
     </div>
 </body>
 <script>
-    const carros = [
-  {
-    "nome": "Fiat Mobi",
-    "diasDisponiveis": 5,
-    "valorDiaria": 100
-  },
-  {
-    "nome": "Renault Kwid",
-    "diasDisponiveis": 7,
-    "valorDiaria": 120
-  },
-  {
-    "nome": "Chevrolet Onix",
-    "diasDisponiveis": 10,
-    "valorDiaria": 150
-  }
-];
+    const tabelaCarros = document.getElementById('carros-alugados');
+    const idCliente = localStorage.getItem('idCliente');
+    // Função para buscar dados da API e atualizar a tabela
+    function buscarCarrosAlugados() {
+                fetch('/api/carros-alugados', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ id_cliente: idCliente })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Limpar linhas existentes
+                tabelaCarros.tBodies[0].innerHTML = '';
 
-const tabelaCarros = document.getElementById("tabela-carros");
+                // Criar nova linha para cada carro
+                    data.carros.forEach(carro => {
+                    const linha = tabelaCarros.insertRow();
+                    linha.innerHTML = `
+                        <td>${carro[1]}</td>
+                        <td>${carro[2]}</td>
+                        <td>${carro[9]}</td>
+                        <td>${carro[8]}</td>
+                    `;
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados da API:', error);
+                // Exibir mensagem de erro para o usuário
+            });
+    }
 
-carros.forEach(carro => {
-  const linha = document.createElement("tr");
-  const celulaCarro = document.createElement("td");
-  const celulaDias = document.createElement("td");
-  const celulaValor = document.createElement("td");
-
-  celulaCarro.textContent = carro.nome;
-  celulaDias.textContent = carro.diasDisponiveis;
-  celulaValor.textContent = carro.valorDiaria * carro.diasDisponiveis;
-
-  linha.appendChild(celulaCarro);
-  linha.appendChild(celulaDias);
-  linha.appendChild(celulaValor);
-
-  tabelaCarros.appendChild(linha);
-});
+    // Chamar a função para buscar os dados ao carregar a página
+    buscarCarrosAlugados();
 </script>
 </html>

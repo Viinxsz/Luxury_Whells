@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, send_from_directory, session
 
-from actions import criar_usuario, login_user
+from actions import criar_usuario, login_user, buscar_carros, alugar_carro
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -49,6 +49,27 @@ def criar_usuario_api():
                       usuario['tipo'])
         print("criou user")
         return {'status': 'true'}, 200
+    except Exception:
+        return {'status': 'false'}, 500
+
+
+@app.route('/api/alugar-carro', methods=['POST'])
+def alugar_carro_api():
+    usuario = request.get_json()
+    try:
+        alugar_carro(usuario['idCliente'], usuario['nomeCarro'], usuario['dataInicio'], usuario['dataFim'])
+        print("alugou carro")
+        return {'status': 'true'}, 200
+    except Exception:
+        return {'status': 'false'}, 500
+
+
+@app.route('/api/carros-alugados', methods=['POST'])
+def carros_alugados_api():
+    info_cliente = request.get_json()
+    try:
+        carros_alugados = buscar_carros(info_cliente['id_cliente'])
+        return carros_alugados, 200
     except Exception:
         return {'status': 'false'}, 500
 
